@@ -1,6 +1,4 @@
-/// Traits for implementing Pets in the petshop
-
-pub trait Species {}
+use crate::species::Species;
 
 /// Trait required for all animals in the petshop
 pub trait Animal {
