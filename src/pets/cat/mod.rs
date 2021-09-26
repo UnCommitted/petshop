@@ -1,17 +1,7 @@
-use crate::animals::{Animal, Species};
+use crate::animals::Animal;
+use crate::species::default::Feline;
+use crate::species::Species;
 use std::fmt;
-
-/// Create a new Feline Species
-#[derive(Clone, Debug, PartialEq)]
-struct Feline;
-
-impl Species for Feline {}
-
-impl fmt::Display for Feline {
-    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        write!(f, "Feline")
-    }
-}
 
 /// Cat
 pub struct Cat<'a> {
@@ -20,10 +10,9 @@ pub struct Cat<'a> {
 }
 
 impl<'a> Cat<'a> {
-    #[allow(dead_code)]
     pub fn new(name: Option<&'a str>) -> Self {
         Cat {
-            name: name,
+            name,
             species: Feline {},
         }
     }
