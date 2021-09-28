@@ -21,7 +21,7 @@ fn test_dog_print_new_no_name() {
 
 #[test]
 fn test_dog_print_new_with_name() {
-    let t_dog = Dog::new(Some("Rover"));
+    let t_dog = Dog::new(Some("Rover".to_string()));
     assert_eq!(
         "Name: Rover, Species: Canine".to_string(),
         t_dog.to_string()
@@ -48,7 +48,7 @@ fn test_cat_print_new_no_name() {
 
 #[test]
 fn test_cat_print_new_with_name() {
-    let t_cat = Cat::new(Some("Tiger"));
+    let t_cat = Cat::new(Some("Tiger".to_string()));
     assert_eq!(
         "Name: Tiger, Species: Feline".to_string(),
         t_cat.to_string()

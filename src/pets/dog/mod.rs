@@ -4,13 +4,13 @@ use crate::species::Species;
 use std::fmt;
 
 /// Dog
-pub struct Dog<'a> {
-    name: Option<&'a str>,
+pub struct Dog {
+    name: Option<String>,
     species: Canine,
 }
 
-impl<'a> Dog<'a> {
-    pub fn new(name: Option<&'a str>) -> Self {
+impl Dog {
+    pub fn new(name: Option<String>) -> Self {
         Dog {
             name,
             species: Canine {},
@@ -18,16 +18,16 @@ impl<'a> Dog<'a> {
     }
 }
 
-impl<'a> fmt::Display for Dog<'a> {
+impl fmt::Display for Dog {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        match self.name {
+        match &self.name {
             Some(name) => write!(f, "Name: {}, Species: {}", name, self.species),
             None => write!(f, "Name: Unnamed, Species: {}", self.species),
         }
     }
 }
 
-impl<'a> Default for Dog<'a> {
+impl Default for Dog {
     fn default() -> Self {
         Dog {
             name: None,
@@ -36,13 +36,17 @@ impl<'a> Default for Dog<'a> {
     }
 }
 
-impl<'a> Animal for Dog<'a> {
-    fn name(&self) -> Option<&str> {
-        self.name
+impl Animal for Dog {
+    fn name(&self) -> Option<String> {
+        self.name.clone()
     }
 
     fn species(&self) -> Box<dyn Species> {
         Box::new(self.species.clone())
+    }
+
+    fn set_name(&mut self, new_name: Option<String>) {
+        self.name = new_name;
     }
 }
 
@@ -66,8 +70,8 @@ mod tests {
 
     #[test]
     fn new_with_name() {
-        let test_dog = Dog::new(Some("Rover"));
-        assert_eq!(test_dog.name, Some("Rover"));
+        let test_dog = Dog::new(Some("Rover".to_string()));
+        assert_eq!(test_dog.name, Some("Rover".to_string()));
         assert_eq!(test_dog.species, Canine {});
     }
 
